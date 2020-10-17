@@ -26,21 +26,18 @@ class Order extends MY_Controller
             $no++;
             $row      = array();
             $order_id = $r->order_id;
-            if ($r->order_status == 1 && $r->order_status == 1) {
+            if ($r->order_status == 1) {
                 $konfirmasi = '<a onclick="konfirmData(' . $order_id . ')" title="Konfirmasi Order"><i class="icon-check"></i></a>';
-                // $hapus      = '<a onclick="hapusData(' . $order_id . ')" title="Hapus Order"><i class="icon-close"></i></a>';
                 $print      = '';
-            } elseif ($r->order_status == 2 && $r->order_status == 2) {
+            } elseif ($r->order_status == 2) {
                 $konfirmasi = '';
-                $hapus      = '';
                 $print      = '<a onclick="printNota(' . $order_id . ')" title="Print Nota"><i class="icon-printer"></i></a>';
             } else {
                 $konfirmasi = '';
-                $hapus      = '';
                 $print      = '';
             }
             $link  = site_url('admin/order/editdata/' . $r->order_id);
-            $row[] = '<a href="' . $link . '" title="Detail Order"><i class="icon-eye"></i></a> ' . $konfirmasi . ' ' . $hapus . ' ' . $print;
+            $row[] = '<a href="' . $link . '" title="Detail Order"><i class="icon-eye"></i></a> ' . $konfirmasi . ' ' . $print;
             $row[] = $no;
             $row[] = $r->order_id;
             $row[] = date('d-m-Y', strtotime($r->order_tanggal));
@@ -132,11 +129,6 @@ class Order extends MY_Controller
         $this->order_m->confirm_data($id);
     }
 
-    public function deletedata($id)
-    {
-        $this->order_m->delete_data($id);
-    }
-
     public function data_order_list($order_id)
     {
         $List = $this->order_m->get_order_datatables($order_id);
@@ -148,8 +140,7 @@ class Order extends MY_Controller
             $row             = array();
             $order_detail_id = $r->order_detail_id;
             if ($r->order_status == 1) {
-                $row[] = '<a title="Edit Data" href="javascript:void(0)" onclick="editData(' . "'" . $order_detail_id . "'" . ')"><i class="icon-pencil"></i></a>
-                                <a onclick="hapusData(' . $order_detail_id . ')" title="Delete Data"><i class="icon-close"></i></a>';
+                $row[] = '<a onclick="hapusData(' . $order_detail_id . ')" title="Delete Data"><i class="icon-close"></i></a>';
             } else {
                 $row[] = '';
             }
