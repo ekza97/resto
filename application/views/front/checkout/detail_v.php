@@ -1,4 +1,4 @@
-<div id="content" class="site-content" tabindex="-1" >
+<div id="content" class="site-content" tabindex="-1">
     <div class="col-full">
         <div class="pizzaro-breadcrumb">
             <nav class="woocommerce-breadcrumb">
@@ -9,21 +9,27 @@
             </nav>
         </div>
         <div id="primary" class="content-area">
-            <main id="main" class="site-main" >
+            <main id="main" class="site-main">
                 <?=$_proses;?>
-                
+
                 <div id="post-9" class="post-9 page type-page status-publish hentry">
                     <header class="entry-header">
                         <h1 class="entry-title">Order Selesai</h1>
                     </header>
                     <div class="entry-content">
                         <div class="woocommerce">
-                            <p class="woocommerce-thankyou-order-received">Terima Kasih, Order Anda Kami Terima.</p>
+                            <p class="woocommerce-thankyou-order-received">Terima Kasih, Pesanan Anda Kami Terima.</p>
+                            <p class="woocommerce-thankyou-order-received">Segera Lakukan Pembayaran Di Kasir Agar
+                                Pesanan Anda Dapat Kami Proses Dengan Cepat.</p>
                             <ul class="woocommerce-thankyou-order-details order_details">
                                 <li class="order">No. Order #:<strong><?=$Order->order_id;?></strong></li>
                                 <li class="date">Tanggal :<strong><?=tgl_indo($Order->order_tanggal);?></strong></li>
-                                <li class="date">Qty dan Waktu :<strong><?=$Order->order_qty.' / '.$Order->order_waktu.' Menit';?></strong></li>
-                                <li class="total">Total :<strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">Rp. </span><?=number_format($Order->order_total,0,'',',');?></span></strong></li>
+                                <li class="date">Qty dan Waktu
+                                    :<strong><?=$Order->order_qty.' / '.$Order->order_waktu.' Menit';?></strong></li>
+                                <li class="total">Total :<strong><span class="woocommerce-Price-amount amount"><span
+                                                class="woocommerce-Price-currencySymbol">Rp.
+                                            </span><?=number_format($Order->order_total,0,'',',');?></span></strong>
+                                </li>
                             </ul>
                             <div class="clear"></div>
                             <p>Silahkan melakukan Pembayaran setelah Anda menikmati hidangan Kami.</p>
@@ -39,9 +45,13 @@
                                     <?php foreach($listOrder as $r) { ?>
                                     <tr class="order_item">
                                         <td class="product-name">
-                                            <a href="<?=site_url('menuorder/'.$r->menu_seo);?>"><?=ucwords(strtolower($r->menu_nama));?></a> <strong class="product-quantity">× <?=$r->order_detail_qty;?></strong>
+                                            <a
+                                                href="<?=site_url('menuorder/'.$r->menu_seo);?>"><?=ucwords(strtolower($r->menu_nama));?></a>
+                                            <strong class="product-quantity">× <?=$r->order_detail_qty;?></strong>
                                         </td>
-                                        <td class="product-total"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">Rp. </span><?=number_format($r->order_detail_subtotal,0,'',',');?></span>
+                                        <td class="product-total"><span class="woocommerce-Price-amount amount"><span
+                                                    class="woocommerce-Price-currencySymbol">Rp.
+                                                </span><?=number_format($r->order_detail_subtotal,0,'',',');?></span>
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -49,7 +59,9 @@
                                 <tfoot>
                                     <tr>
                                         <th scope="row">Total :</th>
-                                        <td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">Rp. </span><?=number_format($Order->order_total,0,'',',');?></span></td>
+                                        <td><span class="woocommerce-Price-amount amount"><span
+                                                    class="woocommerce-Price-currencySymbol">Rp.
+                                                </span><?=number_format($Order->order_total,0,'',',');?></span></td>
                                     </tr>
                                 </tfoot>
                             </table>
