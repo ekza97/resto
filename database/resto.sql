@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jul 10, 2019 at 02:08 PM
--- Server version: 5.7.26-0ubuntu0.18.04.1
--- PHP Version: 7.3.6-1+ubuntu18.04.1+deb.sury.org+1
+-- Host: localhost
+-- Waktu pembuatan: 19 Nov 2020 pada 05.01
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `restoran`
+-- Database: `resto`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_akses`
+-- Struktur dari tabel `resto_akses`
 --
 
 CREATE TABLE `resto_akses` (
@@ -34,7 +35,7 @@ CREATE TABLE `resto_akses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_akses`
+-- Dumping data untuk tabel `resto_akses`
 --
 
 INSERT INTO `resto_akses` (`akses_id`, `user_username`, `kategori_id`, `akses_update`) VALUES
@@ -49,7 +50,7 @@ INSERT INTO `resto_akses` (`akses_id`, `user_username`, `kategori_id`, `akses_up
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_contact`
+-- Struktur dari tabel `resto_contact`
 --
 
 CREATE TABLE `resto_contact` (
@@ -63,16 +64,16 @@ CREATE TABLE `resto_contact` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_contact`
+-- Dumping data untuk tabel `resto_contact`
 --
 
 INSERT INTO `resto_contact` (`contact_id`, `contact_name`, `contact_address`, `contact_phone`, `contact_email`, `contact_web`, `contact_update`) VALUES
-(1, 'YOS RESTO', 'Jalan Trimargo santoso no.272 Pekalongan', '817-700-17800', 'dansdmedia@gmail.com', 'http://dansdigitalmedia.com', '2019-07-10 11:08:29');
+(1, 'RESTO', 'Jl. Ki Hajar Dewantara Amban Permai', '0822-4857-7297', 'nokencode@gmail.com', 'https://nokencode.com', '2020-11-19 10:59:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_kategori`
+-- Struktur dari tabel `resto_kategori`
 --
 
 CREATE TABLE `resto_kategori` (
@@ -84,7 +85,7 @@ CREATE TABLE `resto_kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_kategori`
+-- Dumping data untuk tabel `resto_kategori`
 --
 
 INSERT INTO `resto_kategori` (`kategori_id`, `kategori_nama`, `kategori_seo`, `kategori_icon`, `kategori_update`) VALUES
@@ -96,7 +97,7 @@ INSERT INTO `resto_kategori` (`kategori_id`, `kategori_nama`, `kategori_seo`, `k
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_meja`
+-- Struktur dari tabel `resto_meja`
 --
 
 CREATE TABLE `resto_meja` (
@@ -106,7 +107,7 @@ CREATE TABLE `resto_meja` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_meja`
+-- Dumping data untuk tabel `resto_meja`
 --
 
 INSERT INTO `resto_meja` (`meja_id`, `meja_nama`, `meja_update`) VALUES
@@ -124,7 +125,7 @@ INSERT INTO `resto_meja` (`meja_id`, `meja_nama`, `meja_update`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_menu`
+-- Struktur dari tabel `resto_menu`
 --
 
 CREATE TABLE `resto_menu` (
@@ -134,15 +135,15 @@ CREATE TABLE `resto_menu` (
   `menu_nama` varchar(50) NOT NULL,
   `menu_seo` text NOT NULL,
   `menu_deskripsi` text NOT NULL,
-  `menu_harga` int(10) NOT NULL DEFAULT '0' COMMENT 'Harga',
-  `menu_waktu` int(2) NOT NULL DEFAULT '0' COMMENT 'Waktu Masak',
+  `menu_harga` int(10) NOT NULL DEFAULT 0 COMMENT 'Harga',
+  `menu_waktu` int(2) NOT NULL DEFAULT 0 COMMENT 'Waktu Masak',
   `menu_foto` varchar(100) DEFAULT NULL COMMENT 'Foto Masakan',
-  `menu_jual` int(10) NOT NULL DEFAULT '0',
+  `menu_jual` int(10) NOT NULL DEFAULT 0,
   `menu_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_menu`
+-- Dumping data untuk tabel `resto_menu`
 --
 
 INSERT INTO `resto_menu` (`menu_id`, `kategori_id`, `menu_kode`, `menu_nama`, `menu_seo`, `menu_deskripsi`, `menu_harga`, `menu_waktu`, `menu_foto`, `menu_jual`, `menu_update`) VALUES
@@ -166,14 +167,14 @@ INSERT INTO `resto_menu` (`menu_id`, `kategori_id`, `menu_kode`, `menu_nama`, `m
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_meta`
+-- Struktur dari tabel `resto_meta`
 --
 
 CREATE TABLE `resto_meta` (
   `meta_id` int(2) NOT NULL,
   `meta_name` varchar(50) NOT NULL COMMENT 'Nama Website',
-  `meta_desc` text,
-  `meta_keyword` text,
+  `meta_desc` text DEFAULT NULL,
+  `meta_keyword` text DEFAULT NULL,
   `meta_author` varchar(100) DEFAULT NULL,
   `meta_developer` varchar(50) DEFAULT NULL,
   `meta_robots` varchar(50) DEFAULT NULL,
@@ -182,16 +183,16 @@ CREATE TABLE `resto_meta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_meta`
+-- Dumping data untuk tabel `resto_meta`
 --
 
 INSERT INTO `resto_meta` (`meta_id`, `meta_name`, `meta_desc`, `meta_keyword`, `meta_author`, `meta_developer`, `meta_robots`, `meta_googlebots`, `meta_update`) VALUES
-(1, 'Yos-Resto | Digital Restaurant Menu', 'Aplikasi Menu DIgital untuk Restoran', 'resto', 'YOSEP ALFATAH', 'YOSEP ALFATAH', 'index, follow', 'index, follow', '2019-07-10 11:08:15');
+(1, 'Resto | Digital Restaurant Menu', 'Aplikasi Menu DIgital untuk Restoran', 'resto', 'NOKENCODE', 'NOKENCODE', 'index, follow', 'index, follow', '2020-11-19 10:41:02');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_order`
+-- Struktur dari tabel `resto_order`
 --
 
 CREATE TABLE `resto_order` (
@@ -199,21 +200,21 @@ CREATE TABLE `resto_order` (
   `meja_id` int(2) NOT NULL,
   `order_nama` varchar(50) NOT NULL,
   `order_tanggal` date DEFAULT NULL,
-  `order_catatan` text,
+  `order_catatan` text DEFAULT NULL,
   `order_qty` int(5) NOT NULL,
-  `order_waktu` int(10) NOT NULL DEFAULT '0',
-  `order_diskon` int(10) NOT NULL DEFAULT '0',
-  `order_total` int(10) NOT NULL DEFAULT '0',
-  `order_bayar` int(10) NOT NULL DEFAULT '0',
-  `order_kembali` int(10) DEFAULT '0',
+  `order_waktu` int(10) NOT NULL DEFAULT 0,
+  `order_diskon` int(10) NOT NULL DEFAULT 0,
+  `order_total` int(10) NOT NULL DEFAULT 0,
+  `order_bayar` int(10) NOT NULL DEFAULT 0,
+  `order_kembali` int(10) DEFAULT 0,
   `order_tgl_bayar` date DEFAULT NULL,
-  `order_status` int(1) NOT NULL DEFAULT '1' COMMENT '1=Blm Bayar,2=Bayar',
+  `order_status` int(1) NOT NULL DEFAULT 1 COMMENT '1=Blm Bayar,2=Bayar',
   `user_username` varchar(30) DEFAULT NULL COMMENT 'User Bayar',
   `order_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_order`
+-- Dumping data untuk tabel `resto_order`
 --
 
 INSERT INTO `resto_order` (`order_id`, `meja_id`, `order_nama`, `order_tanggal`, `order_catatan`, `order_qty`, `order_waktu`, `order_diskon`, `order_total`, `order_bayar`, `order_kembali`, `order_tgl_bayar`, `order_status`, `user_username`, `order_update`) VALUES
@@ -223,28 +224,29 @@ INSERT INTO `resto_order` (`order_id`, `meja_id`, `order_nama`, `order_tanggal`,
 (5, 3, 'PEBRIYANTI', '2019-03-23', '', 6, 33, 0, 95000, 100000, 5000, '2019-03-23', 2, 'admin', '2019-03-23 14:18:45'),
 (6, 1, 'YOSEP ALFATAH', '2019-04-29', 'Saya pesan', 2, 18, 0, 40000, 0, 0, NULL, 2, NULL, '2019-04-29 23:00:29'),
 (7, 4, 'AGUS', '2019-04-29', 'beli murah', 3, 16, 0, 30000, 0, 0, NULL, 2, NULL, '2019-04-29 23:00:19'),
-(8, 6, 'DAHRI', '2019-07-10', 'Gpl ya?', 1, 3, 0, 10000, 0, 0, NULL, 1, NULL, '2019-07-10 11:13:42');
+(8, 6, 'DAHRI', '2019-07-10', 'Gpl ya?', 1, 3, 0, 10000, 0, 0, NULL, 1, NULL, '2019-07-10 11:13:42'),
+(9, 1, 'SAYA', '2020-11-19', '', 1, 2, 0, 5000, 0, 0, NULL, 1, NULL, '2020-11-19 10:39:19');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_order_detail`
+-- Struktur dari tabel `resto_order_detail`
 --
 
 CREATE TABLE `resto_order_detail` (
   `order_detail_id` int(10) NOT NULL,
   `order_id` int(10) NOT NULL,
   `menu_id` int(10) NOT NULL,
-  `order_detail_harga` int(10) NOT NULL DEFAULT '0',
-  `order_detail_waktu` int(5) NOT NULL DEFAULT '0',
-  `order_detail_qty` int(5) NOT NULL DEFAULT '0',
-  `order_detail_subtotal` int(10) NOT NULL DEFAULT '0',
-  `order_detail_status` int(1) NOT NULL DEFAULT '1' COMMENT '1=Baru, 2=Selesai',
+  `order_detail_harga` int(10) NOT NULL DEFAULT 0,
+  `order_detail_waktu` int(5) NOT NULL DEFAULT 0,
+  `order_detail_qty` int(5) NOT NULL DEFAULT 0,
+  `order_detail_subtotal` int(10) NOT NULL DEFAULT 0,
+  `order_detail_status` int(1) NOT NULL DEFAULT 1 COMMENT '1=Baru, 2=Selesai',
   `order_detail_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_order_detail`
+-- Dumping data untuk tabel `resto_order_detail`
 --
 
 INSERT INTO `resto_order_detail` (`order_detail_id`, `order_id`, `menu_id`, `order_detail_harga`, `order_detail_waktu`, `order_detail_qty`, `order_detail_subtotal`, `order_detail_status`, `order_detail_update`) VALUES
@@ -268,33 +270,13 @@ INSERT INTO `resto_order_detail` (`order_detail_id`, `order_id`, `menu_id`, `ord
 (22, 7, 11, 5000, 2, 1, 5000, 1, '2019-04-29 22:53:19'),
 (23, 7, 13, 10000, 4, 1, 10000, 1, '2019-04-29 22:53:20'),
 (24, 7, 5, 15000, 10, 1, 15000, 1, '2019-04-29 22:53:20'),
-(25, 8, 12, 10000, 3, 1, 10000, 1, '2019-07-10 11:13:42');
+(25, 8, 12, 10000, 3, 1, 10000, 1, '2019-07-10 11:13:42'),
+(26, 9, 11, 5000, 2, 1, 5000, 1, '2020-11-19 10:39:19');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_printer`
---
-
-CREATE TABLE `resto_printer` (
-  `printer_id` int(2) NOT NULL,
-  `printer_nama` varchar(50) NOT NULL,
-  `printer_lokasi` varchar(100) NOT NULL,
-  `printer_tipe` enum('Nota','-') NOT NULL DEFAULT '-',
-  `printer_update` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `resto_printer`
---
-
-INSERT INTO `resto_printer` (`printer_id`, `printer_nama`, `printer_lokasi`, `printer_tipe`, `printer_update`) VALUES
-(1, 'EPSON TM-T82', '//127.0.0.1/EPSONTM-T82', 'Nota', '2019-07-09 20:39:37');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resto_slider`
+-- Struktur dari tabel `resto_slider`
 --
 
 CREATE TABLE `resto_slider` (
@@ -304,7 +286,7 @@ CREATE TABLE `resto_slider` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_slider`
+-- Dumping data untuk tabel `resto_slider`
 --
 
 INSERT INTO `resto_slider` (`slider_id`, `slider_image`, `slider_update`) VALUES
@@ -314,7 +296,7 @@ INSERT INTO `resto_slider` (`slider_id`, `slider_image`, `slider_update`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_social`
+-- Struktur dari tabel `resto_social`
 --
 
 CREATE TABLE `resto_social` (
@@ -326,19 +308,19 @@ CREATE TABLE `resto_social` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_social`
+-- Dumping data untuk tabel `resto_social`
 --
 
 INSERT INTO `resto_social` (`social_id`, `social_name`, `social_class`, `social_url`, `social_update`) VALUES
-(1, 'Facebook', 'facebook', 'https://facebook.com/dansdigitalmedia', '2019-07-09 19:31:42'),
-(2, 'Twitter', 'twitter', 'https://twitter.com/dansdigitalmedia', '2019-07-09 19:32:18'),
-(3, 'Instagram', 'instagram', 'https://instagram.com/dansdigitalmedia', '2019-07-09 19:32:02'),
-(4, 'Youtube', 'youtube', 'https://www.youtube.com', '2018-11-13 15:00:51');
+(1, 'Facebook', 'facebook', 'https://facebook.com/', '2020-11-19 11:00:28'),
+(2, 'Twitter', 'twitter', 'https://twitter.com/', '2020-11-19 11:00:45'),
+(3, 'Instagram', 'instagram', 'https://instagram.com/', '2020-11-19 11:00:38'),
+(4, 'Youtube', 'youtube', 'https://www.youtube.com', '2020-11-19 11:00:53');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resto_users`
+-- Struktur dari tabel `resto_users`
 --
 
 CREATE TABLE `resto_users` (
@@ -354,19 +336,19 @@ CREATE TABLE `resto_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resto_users`
+-- Dumping data untuk tabel `resto_users`
 --
 
 INSERT INTO `resto_users` (`user_username`, `user_password`, `user_name`, `user_email`, `user_avatar`, `user_status`, `user_level`, `user_date_create`, `user_date_update`) VALUES
-('admin', 'f865b53623b121fd34ee5426c792e5c33af8c227', 'ADMINISTRATOR', 'dansdmedia@gmail.com', 'Avatar_admin_1542355052.jpg', 'Aktif', 'Admin', '0000-00-00 00:00:00', '2019-07-09 19:25:20'),
+('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'ADMINISTRATOR', 'dansdmedia@gmail.com', 'Avatar_admin_1542355052.jpg', 'Aktif', 'Admin', '0000-00-00 00:00:00', '2020-11-19 10:58:31'),
 ('dapur', '7c11a6cf40cff2ad6cf71aa10dfc092167320a90', 'DAPUR', 'dapur@gmail.com', NULL, 'Aktif', 'Dapur', '2019-03-09 21:52:27', '2019-07-09 19:24:44'),
 ('kasir', '8691e4fc53b99da544ce86e22acba62d13352eff', 'KASIR', 'kasir@gmail.com', NULL, 'Aktif', 'Kasir', '2019-03-09 21:52:14', '2019-07-09 19:25:01');
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v_akses`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `v_akses`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `v_akses` (
 `akses_id` int(2)
@@ -379,8 +361,8 @@ CREATE TABLE `v_akses` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v_menu`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `v_menu`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `v_menu` (
 `menu_id` int(10)
@@ -401,8 +383,8 @@ CREATE TABLE `v_menu` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v_order`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `v_order`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `v_order` (
 `order_id` int(10)
@@ -426,8 +408,8 @@ CREATE TABLE `v_order` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v_order_detail`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `v_order_detail`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `v_order_detail` (
 `order_detail_id` int(10)
@@ -452,90 +434,90 @@ CREATE TABLE `v_order_detail` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_akses`
+-- Struktur untuk view `v_akses`
 --
 DROP TABLE IF EXISTS `v_akses`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_akses`  AS  (select `a`.`akses_id` AS `akses_id`,`a`.`user_username` AS `user_username`,`a`.`kategori_id` AS `kategori_id`,`a`.`akses_update` AS `akses_update`,`k`.`kategori_nama` AS `kategori_nama` from (`resto_akses` `a` join `resto_kategori` `k` on((`a`.`kategori_id` = `k`.`kategori_id`)))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_akses`  AS  (select `a`.`akses_id` AS `akses_id`,`a`.`user_username` AS `user_username`,`a`.`kategori_id` AS `kategori_id`,`a`.`akses_update` AS `akses_update`,`k`.`kategori_nama` AS `kategori_nama` from (`resto_akses` `a` join `resto_kategori` `k` on(`a`.`kategori_id` = `k`.`kategori_id`))) ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_menu`
+-- Struktur untuk view `v_menu`
 --
 DROP TABLE IF EXISTS `v_menu`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_menu`  AS  (select `m`.`menu_id` AS `menu_id`,`m`.`kategori_id` AS `kategori_id`,`m`.`menu_kode` AS `menu_kode`,`m`.`menu_nama` AS `menu_nama`,`m`.`menu_seo` AS `menu_seo`,`m`.`menu_deskripsi` AS `menu_deskripsi`,`m`.`menu_harga` AS `menu_harga`,`m`.`menu_waktu` AS `menu_waktu`,`m`.`menu_foto` AS `menu_foto`,`m`.`menu_jual` AS `menu_jual`,`m`.`menu_update` AS `menu_update`,`k`.`kategori_nama` AS `kategori_nama`,`k`.`kategori_seo` AS `kategori_seo` from (`resto_menu` `m` join `resto_kategori` `k` on((`m`.`kategori_id` = `k`.`kategori_id`)))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_menu`  AS  (select `m`.`menu_id` AS `menu_id`,`m`.`kategori_id` AS `kategori_id`,`m`.`menu_kode` AS `menu_kode`,`m`.`menu_nama` AS `menu_nama`,`m`.`menu_seo` AS `menu_seo`,`m`.`menu_deskripsi` AS `menu_deskripsi`,`m`.`menu_harga` AS `menu_harga`,`m`.`menu_waktu` AS `menu_waktu`,`m`.`menu_foto` AS `menu_foto`,`m`.`menu_jual` AS `menu_jual`,`m`.`menu_update` AS `menu_update`,`k`.`kategori_nama` AS `kategori_nama`,`k`.`kategori_seo` AS `kategori_seo` from (`resto_menu` `m` join `resto_kategori` `k` on(`m`.`kategori_id` = `k`.`kategori_id`))) ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_order`
+-- Struktur untuk view `v_order`
 --
 DROP TABLE IF EXISTS `v_order`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_order`  AS  (select `o`.`order_id` AS `order_id`,`o`.`meja_id` AS `meja_id`,`o`.`order_nama` AS `order_nama`,`o`.`order_tanggal` AS `order_tanggal`,`o`.`order_catatan` AS `order_catatan`,`o`.`order_qty` AS `order_qty`,`o`.`order_waktu` AS `order_waktu`,`o`.`order_diskon` AS `order_diskon`,`o`.`order_total` AS `order_total`,`o`.`order_bayar` AS `order_bayar`,`o`.`order_kembali` AS `order_kembali`,`o`.`order_tgl_bayar` AS `order_tgl_bayar`,`o`.`order_status` AS `order_status`,`o`.`user_username` AS `user_username`,`o`.`order_update` AS `order_update`,`m`.`meja_nama` AS `meja_nama` from (`resto_order` `o` join `resto_meja` `m` on((`o`.`meja_id` = `m`.`meja_id`)))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_order`  AS  (select `o`.`order_id` AS `order_id`,`o`.`meja_id` AS `meja_id`,`o`.`order_nama` AS `order_nama`,`o`.`order_tanggal` AS `order_tanggal`,`o`.`order_catatan` AS `order_catatan`,`o`.`order_qty` AS `order_qty`,`o`.`order_waktu` AS `order_waktu`,`o`.`order_diskon` AS `order_diskon`,`o`.`order_total` AS `order_total`,`o`.`order_bayar` AS `order_bayar`,`o`.`order_kembali` AS `order_kembali`,`o`.`order_tgl_bayar` AS `order_tgl_bayar`,`o`.`order_status` AS `order_status`,`o`.`user_username` AS `user_username`,`o`.`order_update` AS `order_update`,`m`.`meja_nama` AS `meja_nama` from (`resto_order` `o` join `resto_meja` `m` on(`o`.`meja_id` = `m`.`meja_id`))) ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_order_detail`
+-- Struktur untuk view `v_order_detail`
 --
 DROP TABLE IF EXISTS `v_order_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_order_detail`  AS  (select `d`.`order_detail_id` AS `order_detail_id`,`d`.`order_id` AS `order_id`,`d`.`menu_id` AS `menu_id`,`d`.`order_detail_harga` AS `order_detail_harga`,`d`.`order_detail_waktu` AS `order_detail_waktu`,`d`.`order_detail_qty` AS `order_detail_qty`,`d`.`order_detail_subtotal` AS `order_detail_subtotal`,`d`.`order_detail_status` AS `order_detail_status`,`d`.`order_detail_update` AS `order_detail_update`,`m`.`menu_kode` AS `menu_kode`,`m`.`menu_nama` AS `menu_nama`,`m`.`menu_seo` AS `menu_seo`,`m`.`kategori_id` AS `kategori_id`,`o`.`order_status` AS `order_status`,`o`.`order_tanggal` AS `order_tanggal`,`o`.`meja_id` AS `meja_id`,`j`.`meja_nama` AS `meja_nama` from (((`resto_order_detail` `d` join `resto_order` `o` on((`d`.`order_id` = `o`.`order_id`))) join `resto_menu` `m` on((`d`.`menu_id` = `m`.`menu_id`))) join `resto_meja` `j` on((`o`.`meja_id` = `j`.`meja_id`)))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_order_detail`  AS  (select `d`.`order_detail_id` AS `order_detail_id`,`d`.`order_id` AS `order_id`,`d`.`menu_id` AS `menu_id`,`d`.`order_detail_harga` AS `order_detail_harga`,`d`.`order_detail_waktu` AS `order_detail_waktu`,`d`.`order_detail_qty` AS `order_detail_qty`,`d`.`order_detail_subtotal` AS `order_detail_subtotal`,`d`.`order_detail_status` AS `order_detail_status`,`d`.`order_detail_update` AS `order_detail_update`,`m`.`menu_kode` AS `menu_kode`,`m`.`menu_nama` AS `menu_nama`,`m`.`menu_seo` AS `menu_seo`,`m`.`kategori_id` AS `kategori_id`,`o`.`order_status` AS `order_status`,`o`.`order_tanggal` AS `order_tanggal`,`o`.`meja_id` AS `meja_id`,`j`.`meja_nama` AS `meja_nama` from (((`resto_order_detail` `d` join `resto_order` `o` on(`d`.`order_id` = `o`.`order_id`)) join `resto_menu` `m` on(`d`.`menu_id` = `m`.`menu_id`)) join `resto_meja` `j` on(`o`.`meja_id` = `j`.`meja_id`))) ;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `resto_akses`
+-- Indeks untuk tabel `resto_akses`
 --
 ALTER TABLE `resto_akses`
   ADD PRIMARY KEY (`akses_id`),
   ADD KEY `user_username` (`user_username`);
 
 --
--- Indexes for table `resto_contact`
+-- Indeks untuk tabel `resto_contact`
 --
 ALTER TABLE `resto_contact`
   ADD PRIMARY KEY (`contact_id`);
 
 --
--- Indexes for table `resto_kategori`
+-- Indeks untuk tabel `resto_kategori`
 --
 ALTER TABLE `resto_kategori`
   ADD PRIMARY KEY (`kategori_id`);
 
 --
--- Indexes for table `resto_meja`
+-- Indeks untuk tabel `resto_meja`
 --
 ALTER TABLE `resto_meja`
   ADD PRIMARY KEY (`meja_id`);
 
 --
--- Indexes for table `resto_menu`
+-- Indeks untuk tabel `resto_menu`
 --
 ALTER TABLE `resto_menu`
   ADD PRIMARY KEY (`menu_id`),
   ADD KEY `kategori_id` (`kategori_id`);
 
 --
--- Indexes for table `resto_meta`
+-- Indeks untuk tabel `resto_meta`
 --
 ALTER TABLE `resto_meta`
   ADD PRIMARY KEY (`meta_id`);
 
 --
--- Indexes for table `resto_order`
+-- Indeks untuk tabel `resto_order`
 --
 ALTER TABLE `resto_order`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `resto_order_ibfk_1` (`meja_id`);
 
 --
--- Indexes for table `resto_order_detail`
+-- Indeks untuk tabel `resto_order_detail`
 --
 ALTER TABLE `resto_order_detail`
   ADD PRIMARY KEY (`order_detail_id`),
@@ -543,116 +525,116 @@ ALTER TABLE `resto_order_detail`
   ADD KEY `resto_order_detail_ibfk_2` (`menu_id`);
 
 --
--- Indexes for table `resto_printer`
---
-ALTER TABLE `resto_printer`
-  ADD PRIMARY KEY (`printer_id`);
-
---
--- Indexes for table `resto_slider`
+-- Indeks untuk tabel `resto_slider`
 --
 ALTER TABLE `resto_slider`
   ADD PRIMARY KEY (`slider_id`);
 
 --
--- Indexes for table `resto_social`
+-- Indeks untuk tabel `resto_social`
 --
 ALTER TABLE `resto_social`
   ADD PRIMARY KEY (`social_id`);
 
 --
--- Indexes for table `resto_users`
+-- Indeks untuk tabel `resto_users`
 --
 ALTER TABLE `resto_users`
   ADD PRIMARY KEY (`user_username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `resto_akses`
+-- AUTO_INCREMENT untuk tabel `resto_akses`
 --
 ALTER TABLE `resto_akses`
   MODIFY `akses_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
--- AUTO_INCREMENT for table `resto_contact`
+-- AUTO_INCREMENT untuk tabel `resto_contact`
 --
 ALTER TABLE `resto_contact`
   MODIFY `contact_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `resto_kategori`
+-- AUTO_INCREMENT untuk tabel `resto_kategori`
 --
 ALTER TABLE `resto_kategori`
   MODIFY `kategori_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT for table `resto_meja`
+-- AUTO_INCREMENT untuk tabel `resto_meja`
 --
 ALTER TABLE `resto_meja`
   MODIFY `meja_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
--- AUTO_INCREMENT for table `resto_menu`
+-- AUTO_INCREMENT untuk tabel `resto_menu`
 --
 ALTER TABLE `resto_menu`
   MODIFY `menu_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
--- AUTO_INCREMENT for table `resto_meta`
+-- AUTO_INCREMENT untuk tabel `resto_meta`
 --
 ALTER TABLE `resto_meta`
   MODIFY `meta_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `resto_order`
+-- AUTO_INCREMENT untuk tabel `resto_order`
 --
 ALTER TABLE `resto_order`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
--- AUTO_INCREMENT for table `resto_order_detail`
+-- AUTO_INCREMENT untuk tabel `resto_order_detail`
 --
 ALTER TABLE `resto_order_detail`
-  MODIFY `order_detail_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `order_detail_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
--- AUTO_INCREMENT for table `resto_printer`
---
-ALTER TABLE `resto_printer`
-  MODIFY `printer_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `resto_slider`
+-- AUTO_INCREMENT untuk tabel `resto_slider`
 --
 ALTER TABLE `resto_slider`
   MODIFY `slider_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `resto_social`
+-- AUTO_INCREMENT untuk tabel `resto_social`
 --
 ALTER TABLE `resto_social`
   MODIFY `social_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `resto_akses`
+-- Ketidakleluasaan untuk tabel `resto_akses`
 --
 ALTER TABLE `resto_akses`
   ADD CONSTRAINT `resto_akses_ibfk_1` FOREIGN KEY (`user_username`) REFERENCES `resto_users` (`user_username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `resto_menu`
+-- Ketidakleluasaan untuk tabel `resto_menu`
 --
 ALTER TABLE `resto_menu`
   ADD CONSTRAINT `resto_menu_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `resto_kategori` (`kategori_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `resto_order`
+-- Ketidakleluasaan untuk tabel `resto_order`
 --
 ALTER TABLE `resto_order`
   ADD CONSTRAINT `resto_order_ibfk_1` FOREIGN KEY (`meja_id`) REFERENCES `resto_meja` (`meja_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `resto_order_detail`
+-- Ketidakleluasaan untuk tabel `resto_order_detail`
 --
 ALTER TABLE `resto_order_detail`
   ADD CONSTRAINT `resto_order_detail_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `resto_order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `resto_order_detail_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `resto_menu` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
